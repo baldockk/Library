@@ -37,16 +37,15 @@ function displayBooks() {
         const bookContent = document.createElement("p");
         bookContent.classList.add("content");
         bookContent.textContent = myLibrary[i].info();
-        console.log(myLibrary[i].info());
         bookContainer.appendChild(bookContent);
+
+        //add the remove button to the created books
+        const buttonRemove = document.createElement("button");
+        buttonRemove.textContent = "Remove";
+        buttonRemove.classList.add("remove");
+        bookContent.appendChild(buttonRemove);
     }
 }
-
-addBookToLibrary("Demon Slayer", "Ufotable", 250, false);
-addBookToLibrary("Some Book", "That Guy", 250, false);
-addBookToLibrary("That Book", "Some Guy", 250, false);
-addBookToLibrary("Javascript", "Not Sure", 250, false);
-displayBooks();
 
 //Get the popup div for displaying the popup
 const popupForm = document.getElementById("pop_container");

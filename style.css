@@ -44,6 +44,8 @@ h1 {
     margin: 10px;
     width: 200px;
     height: 200px;
+    display: flex;
+    flex-direction: column;
 }
 
 .control_container {
