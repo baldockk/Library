@@ -42,21 +42,42 @@ function displayBooks() {
     }
 }
 
-addBookToLibrary("Something", "Rather", 250, false);
-addBookToLibrary("More", "Money", 250, false);
-addBookToLibrary("Dingle", "Bob", 250, false);
-addBookToLibrary("Kyojuro", "Rengoku", 250, false);
+addBookToLibrary("Demon Slayer", "Ufotable", 250, false);
+addBookToLibrary("Some Book", "That Guy", 250, false);
+addBookToLibrary("That Book", "Some Guy", 250, false);
+addBookToLibrary("Javascript", "Not Sure", 250, false);
 displayBooks();
 
 //Get the popup div for displaying the popup
 const popupForm = document.getElementById("pop_container");
+//Get the actual form
+const form = document.querySelector("form");
 //Add a click event listener for the add book button
 const buttonAdd = document.querySelector("#add_book");
 buttonAdd.addEventListener("click", e => popupForm.style.display = "block");
 
-popupForm.addEventListener('submit', (event) => {
+form.addEventListener('submit', (event) => {
     // stop form submission
     event.preventDefault();
+});
+
+const buttonSubmit = document.getElementById("submit");
+buttonSubmit.addEventListener("click", () => {
+     //Get the form input values
+     const title = document.getElementById("title").value; 
+     const author = document.getElementById("author").value;
+     const numPages = parseInt(document.getElementById("numPages").value, 10);
+     const hasRead = document.querySelector('input[name="read"]:checked').id === "read-yes";
+ 
+     //Add the new book to the library
+     addBookToLibrary(title, author, numPages, hasRead);
+     //Reset the form so it is cleared of any input
+    form.reset();
+
+     //Close the popup and update the displayed books
+     popupForm.style.display = "none";
+     bookContainer.innerHTML = "";  // Clear the container to avoid duplications
+     displayBooks();
 });
 
 
