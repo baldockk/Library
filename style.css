@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+}
+
+.flex_container {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(80, 75, 75);
+    padding: 10px;
+}
+
+.book_container {
+    height: auto;
+    width: 75%;
+    border: solid black 1px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/*The left hand side will house the button for adding a new book*/
+.control_container {
+    height: auto;
+    width: 25%;
+    border: solid red 1px;
+}
+
+h1 {
+    text-align: center;
+    margin: 10px;
+}
+
+.content {
+    background-color: white;
+    border: solid pink 1px;
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+}
+
+.control_container {
+    display: flex;
+    flex-direction: column;
+}
+
+#add_book {
+    background-color: orange;
+    color: white;
+    width: 70%;
+    height: 10%;
+    align-self: center;
+    margin-top: 40px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/*This section will contain the popup which appears when the user selects add book*/
+.pop_container {
+    background-color: black;
+    /*Key to hiding the popup until needed*/
+    display: none;
+    position: fixed;
+    margin: 40px;
+    margin-top: 150px;
+    width: 400px;
+    padding: 30px;
+}
+
+.form_popup {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.form_popup label {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+h3 {
+    margin: 10px;
+}
+
+.read_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.submit_container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#submit {
+    background-color: green;
+    color: white;
+    height: 50px;
+    width: 90px;
+    font-size: 20px;
+    font-weight: bold;
+}
