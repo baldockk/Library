@@ -34,7 +34,7 @@ const bookContainer = document.querySelector(".book_container");
 function displayBooks() {
     for(let i = 0; i < myLibrary.length; i++){
         //Add each book to their own card. This card element will make a container which containers a paragraph, a remove and a status button
-        const bookContent = document.createElement("p");
+        const bookContent = document.createElement("div");
         bookContent.classList.add("content");
         //Sets the attribute to match the index of the card so removing it will be easier.
         bookContent.setAttribute("card", i);
@@ -46,12 +46,17 @@ function displayBooks() {
         text.textContent = myLibrary[i].info();
         bookContent.appendChild(text);
 
+        //Add a div so the buttons are easier to align side by side
+        const div = document.createElement("div");
+        div.classList.add("divButtons");
+        bookContent.appendChild(div);
+
         //add the remove button to the created books
         const buttonRemove = document.createElement("button");
         buttonRemove.textContent = "Remove";
         buttonRemove.classList.add("remove");
         buttonRemove.setAttribute("removePos", i);
-        bookContent.appendChild(buttonRemove);
+        div.appendChild(buttonRemove);
 
         //Set an event listener on every books remove button
         buttonRemove.addEventListener("click", () => {
@@ -64,7 +69,7 @@ function displayBooks() {
         buttonReadTrue.textContent = "Has Read";
         buttonReadTrue.classList.add("read");
         buttonReadTrue.setAttribute("tf", "true");
-        bookContent.appendChild(buttonReadTrue);
+        div.appendChild(buttonReadTrue);
 
       //Update the specific book instance when the "Has Read" button is clicked
         buttonReadTrue.addEventListener("click", () => {
@@ -75,9 +80,9 @@ function displayBooks() {
         //Add the "Has Not Read" button
         const buttonReadFalse = document.createElement("button");
         buttonReadFalse.textContent = "Has Not Read";
-        buttonReadFalse.classList.add("read");
+        buttonReadFalse.classList.add("not-read");
         buttonReadFalse.setAttribute("tf", "false");
-        bookContent.appendChild(buttonReadFalse);
+        div.appendChild(buttonReadFalse);
 
         //Update the specific book instance when the "Has Not Read" button is clicked
         buttonReadFalse.addEventListener("click", () => {

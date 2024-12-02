@@ -1,6 +1,7 @@
 * {
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 body, html {
@@ -43,9 +44,10 @@ h1 {
     border: solid pink 1px;
     margin: 10px;
     width: 200px;
-    height: 200px;
+    height: 150px;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
 }
 
 .control_container {
@@ -64,6 +66,12 @@ h1 {
     font-weight: bold;
 }
 
+p {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
 /*This section will contain the popup which appears when the user selects add book*/
 .pop_container {
     background-color: black;
@@ -74,6 +82,10 @@ h1 {
     margin-top: 150px;
     width: 400px;
     padding: 30px;
+}
+
+form {
+    justify-items: center;
 }
 
 .form_popup {
@@ -114,5 +126,35 @@ h3 {
     height: 50px;
     width: 90px;
     font-size: 20px;
+    font-weight: bold;
+}
+
+.divButtons {
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: 2;
+}
+
+.remove {
+    grid-row: 2 / 3;
+    grid-column: 1 / 3;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+.textContent {
+    padding: 5px;
+}
+
+.read {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+
+.not-read {
+    background-color: orange;
+    color: white;
     font-weight: bold;
 }
