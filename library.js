@@ -10,7 +10,7 @@ function Book(title, author, numPages, hasRead) {
     this.info = function() {
         let readResult;
         /*Displays text based on whether the user has read the current book*/
-        if(hasRead){
+        if(this.hasRead){
             readResult = "has read already";
         } else{
             readResult = "has not read";
@@ -36,14 +36,54 @@ function displayBooks() {
         //Add each book to their own card. This card element will make a container which containers a paragraph, a remove and a status button
         const bookContent = document.createElement("p");
         bookContent.classList.add("content");
-        bookContent.textContent = myLibrary[i].info();
+        //Sets the attribute to match the index of the card so removing it will be easier.
+        bookContent.setAttribute("card", i);
         bookContainer.appendChild(bookContent);
+
+        //Add an internal paragrpah so it can be changed
+        const text = document.createElement("p");
+        text.classList.add("textContent");
+        text.textContent = myLibrary[i].info();
+        bookContent.appendChild(text);
 
         //add the remove button to the created books
         const buttonRemove = document.createElement("button");
         buttonRemove.textContent = "Remove";
         buttonRemove.classList.add("remove");
+        buttonRemove.setAttribute("removePos", i);
         bookContent.appendChild(buttonRemove);
+
+        //Set an event listener on every books remove button
+        buttonRemove.addEventListener("click", () => {
+            removeBook(buttonRemove.getAttribute("removePos"));
+            text.textContent = myLibrary[i].info();
+        });
+
+        //Add the adjust button for whether the book is read and adjust it using the new prototype method
+        const buttonReadTrue = document.createElement("button");
+        buttonReadTrue.textContent = "Has Read";
+        buttonReadTrue.classList.add("read");
+        buttonReadTrue.setAttribute("tf", "true");
+        bookContent.appendChild(buttonReadTrue);
+
+      //Update the specific book instance when the "Has Read" button is clicked
+        buttonReadTrue.addEventListener("click", () => {
+            myLibrary[i].bookIsRead(true);
+            text.textContent = myLibrary[i].info();
+        });
+
+        //Add the "Has Not Read" button
+        const buttonReadFalse = document.createElement("button");
+        buttonReadFalse.textContent = "Has Not Read";
+        buttonReadFalse.classList.add("read");
+        buttonReadFalse.setAttribute("tf", "false");
+        bookContent.appendChild(buttonReadFalse);
+
+        //Update the specific book instance when the "Has Not Read" button is clicked
+        buttonReadFalse.addEventListener("click", () => {
+            myLibrary[i].bookIsRead(false);
+            text.textContent = myLibrary[i].info();
+        });
     }
 }
 
@@ -55,18 +95,18 @@ const form = document.querySelector("form");
 const buttonAdd = document.querySelector("#add_book");
 buttonAdd.addEventListener("click", e => popupForm.style.display = "block");
 
-form.addEventListener('submit', (event) => {
-    // stop form submission
-    event.preventDefault();
-});
-
 const buttonSubmit = document.getElementById("submit");
-buttonSubmit.addEventListener("click", () => {
+buttonSubmit.addEventListener("click", event => {
+    event.preventDefault();
      //Get the form input values
      const title = document.getElementById("title").value; 
      const author = document.getElementById("author").value;
      const numPages = parseInt(document.getElementById("numPages").value, 10);
-     const hasRead = document.querySelector('input[name="read"]:checked').id === "read-yes";
+     const selectedOption = document.querySelector('input[name="read"]:checked').id;
+     let hasRead = false;
+     if (selectedOption === "read-yes") {
+        hasRead = true;
+     } 
  
      //Add the new book to the library
      addBookToLibrary(title, author, numPages, hasRead);
@@ -79,4 +119,20 @@ buttonSubmit.addEventListener("click", () => {
      displayBooks();
 });
 
+function removeBook(index) {
+    myLibrary.splice(index, 1);
+    
+     //Find the specific book card to remove from the DOM
+     const bookCard = document.querySelector(`[card="${index}"]`);
+     if (bookCard) {
+         bookCard.remove();
+     }
 
+     bookContainer.innerHTML = "";
+     displayBooks();
+}
+
+//Add a function to the Book object so we can adjust whether the book is read
+Book.prototype.bookIsRead = function(isRead) {
+    this.hasRead = isRead;
+}
