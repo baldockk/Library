@@ -1,13 +1,15 @@
 const myLibrary = [];
 
 /*Constructs the book object with a title, author, number of pages and whether it has been read by the user*/
-function Book(title, author, numPages, hasRead) {
-    this.title = title;
-    this.author = author;
-    this.numPages = numPages;
-    this.hasRead = hasRead;
+class Book{
+    constructor(title, author, numPages, hasRead) {
+        this.title = title;
+        this.author = author;
+        this.numPages = numPages;
+        this.hasRead = hasRead;
+    }
 
-    this.info = function() {
+    info() {
         let readResult;
         /*Displays text based on whether the user has read the current book*/
         if(this.hasRead){
@@ -18,6 +20,11 @@ function Book(title, author, numPages, hasRead) {
 
         return `${this.title} by ${this.author}, ${this.numPages} pages, ${readResult}`;
     };
+
+    //Add a function to the Book object so we can adjust whether the book is read
+    bookIsRead(isRead) {
+        this.hasRead = isRead;
+    }
 }
 
 
@@ -137,7 +144,3 @@ function removeBook(index) {
      displayBooks();
 }
 
-//Add a function to the Book object so we can adjust whether the book is read
-Book.prototype.bookIsRead = function(isRead) {
-    this.hasRead = isRead;
-}
